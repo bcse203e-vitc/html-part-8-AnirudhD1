@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Image Carousel</title>
+</head>
+<body>
+    <img id="carousel" src="https://chennai.vit.ac.in/wp-content/uploads/2020/03/campus-banner.jpg" width="300">
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+
+    <script>
+        let images = [
+            "https://chennai.vit.ac.in/wp-content/uploads/2020/06/infra-3.jpg", 
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLOEhAARsQe4OgY8rR_WvSCo8pjPU-cIAedxV48e7y_sN86FO-MQ_niKaMS_2kLTMv5KU&usqp=CAU", 
+            "https://chennai.vit.ac.in/wp-content/uploads/2020/01/25-1.jpg"
+        ];
+        let index = 0;
+        let interval;
+
+        function showImage() {
+            document.getElementById("carousel").src = images[index];
+        }
+        
+        function prevImage() {
+            index = (index - 1 + images.length) % images.length;
+            showImage();
+        }
+
+        function nextImage() {
+            index = (index + 1) % images.length;
+            showImage();
+        }
+
+        function startSlideshow() {
+            interval = setInterval(nextImage, 3000);
+        }
+
+        function stopSlideshow() {
+            clearInterval(interval);
+        }
+
+        startSlideshow();
+
+        document.getElementById("carousel").addEventListener("mouseenter", stopSlideshow);
+        document.getElementById("carousel").addEventListener("mouseleave", startSlideshow);
+    </script>
+</body>
+</html>
